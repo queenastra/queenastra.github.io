@@ -104,9 +104,14 @@ h3 {
     font-size: clamp(30px, 4vw, 48px);
 }
 
+.book-subtitle {
+    font-size: .8em;
+    color: var(--muted);
+}
+
 p {
-    font-size: 17px;
-    line-height: 1.8;
+    font-size: 19px;
+    line-height: 1.75;
     color: var(--muted);
     margin: 0 0 22px;
 }
@@ -131,6 +136,15 @@ p {
 
 .bio-details {
     display: contents;
+}
+
+.bio-motto {
+    padding-left: 16px;
+    border-left: 3px solid var(--pink);
+    color: var(--white);
+    font-size: clamp(20px, 2.5vw, 25px);
+    font-style: italic;
+    line-height: 1.4;
 }
 
 .book {
@@ -164,7 +178,7 @@ p {
 .book img {
     aspect-ratio: 2 / 3;
     object-fit: contain;
-    border: 1px solid var(--line);
+    border: 2px solid var(--pink);
 }
 
 .buttons {
@@ -226,6 +240,11 @@ p {
 
 .mission {
     max-width: 900px;
+}
+
+.mission a {
+    color: var(--pink);
+    text-underline-offset: 3px;
 }
 
 footer {
