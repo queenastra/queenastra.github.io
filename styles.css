@@ -269,74 +269,35 @@ footer {
 
     .bio,
     .book {
-        grid-template-columns: 1fr;
-        gap: 30px;
+        display: flow-root;
     }
 
-    .bio {
-        grid-template-columns: minmax(105px, 35%) 1fr;
-        grid-template-areas:
-            "image details"
-            "buttons buttons";
-        column-gap: 22px;
-        row-gap: 30px;
-        align-items: start;
+    .bio img,
+    .book img {
+        float: left;
+        width: 35%;
+        max-width: 220px;
+        margin: 0 20px 12px 0;
     }
 
-    .bio img {
-        grid-area: image;
-        max-width: 420px;
-    }
-
-    .bio-content {
+    .bio-content,
+    .bio-details,
+    .book-content,
+    .book-details {
         display: contents;
-    }
-
-    .bio-details {
-        display: block;
-        grid-area: details;
     }
 
     .bio-details h1 {
         font-size: clamp(26px, 8vw, 38px);
     }
 
-    .bio .buttons {
-        grid-area: buttons;
-        margin-top: 0;
-    }
-
-    .book img {
-        grid-area: cover;
-        max-width: none;
-    }
-
-    .book {
-        grid-template-columns: minmax(105px, 35%) 1fr;
-        grid-template-areas:
-            "cover details"
-            "buttons buttons";
-        column-gap: 22px;
-        row-gap: 30px;
-        align-items: start;
-    }
-
-    .book-content {
-        display: contents;
-    }
-
-    .book-details {
-        grid-area: details;
-    }
-
     .book-details h3 {
         font-size: clamp(26px, 8vw, 38px);
     }
 
+    .bio .buttons,
     .book-buttons {
-        grid-area: buttons;
-        width: 100%;
-        margin-top: 0;
+        clear: both;
     }
 
     section {
