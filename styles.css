@@ -1,0 +1,310 @@
+:root {
+    --bg: #151316;
+    --panel: #211b21;
+    --pink: #ff1493;
+    --white: #f8f3f6;
+    --muted: #c9bec6;
+    --line: #49303f;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: radial-gradient(ellipse at 95% 85%, #291622, transparent 45%), var(--bg);
+    color: var(--white);
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 0 28px;
+}
+
+header {
+    border-bottom: 1px solid var(--line);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding-top: 25px !important;
+    padding-bottom: 25px !important;
+}
+
+.logo {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: bold;
+    white-space: nowrap;
+    text-decoration: none;
+    color: var(--white);
+}
+
+.pink {
+    color: var(--pink);
+}
+
+nav .links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+nav .links a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 16px;
+}
+
+nav .links a:hover {
+    color: var(--pink);
+}
+
+section {
+    padding: 75px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+h1,
+h2,
+h3 {
+    font-weight: normal;
+    line-height: 1.1;
+    margin: 0 0 25px;
+}
+
+h1,
+h2 {
+    font-size: clamp(42px, 6vw, 70px);
+}
+
+h3 {
+    font-size: clamp(30px, 4vw, 48px);
+}
+
+p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--muted);
+    margin: 0 0 22px;
+}
+
+.bio,
+.book {
+    display: grid;
+    grid-template-columns: 38% 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.bio {
+    align-items: stretch;
+}
+
+.bio-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.bio-details {
+    display: contents;
+}
+
+.book {
+    grid-template-areas: "cover content";
+    align-items: stretch;
+}
+
+.book>img {
+    grid-area: cover;
+}
+
+.book-content {
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.bio img,
+.book img {
+    display: block;
+    width: 100%;
+}
+
+.bio img {
+    aspect-ratio: 4 / 5;
+    object-fit: contain;
+    border: 0;
+}
+
+.book img {
+    aspect-ratio: 2 / 3;
+    object-fit: contain;
+    border: 1px solid var(--line);
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.book-buttons {
+    display: grid;
+    width: min(100%, 600px);
+}
+
+.book-buttons .btn {
+    width: 100%;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 49px;
+    padding: 13px 20px;
+    border: 1px solid var(--pink);
+    border-radius: 0;
+    font: bold 12px Arial, sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    transition: background .2s, color .2s;
+}
+
+.btn-primary {
+    background: var(--pink);
+    color: white;
+}
+
+.btn-secondary {
+    background: var(--panel);
+    color: var(--white);
+}
+
+.btn:hover {
+    background: #ff65b4;
+    color: #151316;
+}
+
+.books-heading {
+    margin-bottom: 45px;
+}
+
+#books .book+.book {
+    margin-top: 70px;
+    padding-top: 70px;
+    border-top: 1px solid var(--line);
+}
+
+.mission {
+    max-width: 900px;
+}
+
+footer {
+    padding: 35px 0;
+    color: #a995a2;
+    font: 12px Arial, sans-serif;
+}
+
+@media (max-width: 750px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav .links {
+        gap: 15px;
+    }
+
+    .bio,
+    .book {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .bio {
+        grid-template-columns: minmax(105px, 35%) 1fr;
+        grid-template-areas:
+            "image details"
+            "buttons buttons";
+        column-gap: 22px;
+        row-gap: 30px;
+        align-items: start;
+    }
+
+    .bio img {
+        grid-area: image;
+        max-width: 420px;
+    }
+
+    .bio-content {
+        display: contents;
+    }
+
+    .bio-details {
+        display: block;
+        grid-area: details;
+    }
+
+    .bio-details h1 {
+        font-size: clamp(26px, 8vw, 38px);
+    }
+
+    .bio .buttons {
+        grid-area: buttons;
+        margin-top: 0;
+    }
+
+    .book img {
+        grid-area: cover;
+        max-width: none;
+    }
+
+    .book {
+        grid-template-columns: minmax(105px, 35%) 1fr;
+        grid-template-areas:
+            "cover details"
+            "buttons buttons";
+        column-gap: 22px;
+        row-gap: 30px;
+        align-items: start;
+    }
+
+    .book-content {
+        display: contents;
+    }
+
+    .book-details {
+        grid-area: details;
+    }
+
+    .book-details h3 {
+        font-size: clamp(26px, 8vw, 38px);
+    }
+
+    .book-buttons {
+        grid-area: buttons;
+        width: 100%;
+        margin-top: 0;
+    }
+
+    section {
+        padding: 50px 0;
+    }
+}

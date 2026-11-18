@@ -1,615 +1,110 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Queen Astra</title>
-<link rel="icon" type="image/png" sizes="64x64" href="images/favicon/favicon.png">
-<link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
-<style>
-:root {
-  --bg: #151316;
-  --panel: #211b21;
-  --pink: #ff1493;
-  --white: #f8f3f6;
-  --muted: #c9bec6;
-  --line: #49303f;
-}
-
-* { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  margin: 0;
-  background: radial-gradient(ellipse at 95% 85%, #291622, transparent 45%), var(--bg);
-  color: var(--white);
-  font-family: Georgia, "Times New Roman", serif;
-}
-
-.container {
-  max-width: 1150px;
-  margin: auto;
-  padding: 0 28px;
-}
-
-header {
-  border-bottom: 1px solid var(--line);
-}
-
-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding-top: 25px !important;
-  padding-bottom: 25px !important;
-}
-
-.logo {
-  font-size: clamp(28px, 4vw, 42px);
-  font-weight: bold;
-  white-space: nowrap;
-  text-decoration: none;
-  color: var(--white);
-}
-
-.pink { color: var(--pink); }
-
-nav .links {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 25px;
-}
-
-nav .links a {
-  color: var(--white);
-  text-decoration: none;
-  font-size: 16px;
-}
-
-nav .links a:hover { color: var(--pink); }
-
-.language {
-  display: flex;
-  border: 1px solid var(--pink);
-}
-
-.language button {
-  border: 0;
-  background: transparent;
-  color: var(--white);
-  padding: 9px 14px;
-  cursor: pointer;
-}
-
-.language button.active {
-  background: var(--pink);
-}
-
-section {
-  padding: 75px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-h1, h2, h3 {
-  font-weight: normal;
-  line-height: 1.1;
-  margin: 0 0 25px;
-}
-
-h1, h2 {
-  font-size: clamp(42px, 6vw, 70px);
-}
-
-h3 {
-  font-size: clamp(30px, 4vw, 48px);
-}
-
-p {
-  font-size: 17px;
-  line-height: 1.8;
-  color: var(--muted);
-  margin: 0 0 22px;
-}
-
-.bio, .book {
-  display: grid;
-  grid-template-columns: 38% 1fr;
-  gap: 60px;
-  align-items: center;
-}
-
-.bio {
-  align-items: stretch;
-}
-
-.bio-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-
-.bio-details {
-  display: contents;
-}
-
-.book {
-  grid-template-areas: "cover content";
-  align-items: stretch;
-}
-
-.book > img { grid-area: cover; }
-.book-content {
-  grid-area: content;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-
-.bio img, .book img {
-  display: block;
-  width: 100%;
-}
-
-.bio img {
-  aspect-ratio: 4 / 5;
-  object-fit: contain;
-  border: 0;
-}
-
-.book img {
-  aspect-ratio: 2 / 3;
-  object-fit: contain;
-  border: 1px solid var(--line);
-}
-
-.buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 30px;
-}
-
-.book-buttons {
-  display: grid;
-  width: min(100%, 600px);
-}
-
-.book-buttons .btn { width: 100%; }
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 49px;
-  padding: 13px 20px;
-  border: 1px solid var(--pink);
-  border-radius: 0;
-  font: bold 12px Arial, sans-serif;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  text-align: center;
-  transition: background .2s, color .2s;
-}
-
-.btn-primary {
-  background: var(--pink);
-  color: white;
-}
-
-.btn-secondary {
-  background: var(--panel);
-  color: var(--white);
-}
-
-.btn:hover {
-  background: #ff65b4;
-  color: #151316;
-}
-
-.btn[aria-disabled="true"] {
-  cursor: default;
-  opacity: .65;
-}
-
-.btn[aria-disabled="true"]:hover {
-  background: var(--panel);
-  color: var(--white);
-}
-
-.books-heading { margin-bottom: 45px; }
-
-#books .book + .book {
-  margin-top: 70px;
-  padding-top: 70px;
-  border-top: 1px solid var(--line);
-}
-
-.mission {
-  max-width: 900px;
-}
-
-footer {
-  padding: 35px 0;
-  color: #a995a2;
-  font: 12px Arial, sans-serif;
-}
-
-@media (max-width: 750px) {
-  nav {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  nav .links { gap: 15px; }
-
-  .bio, .book {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  .bio {
-    grid-template-columns: minmax(105px, 35%) 1fr;
-    grid-template-areas:
-      "image details"
-      "buttons buttons";
-    column-gap: 22px;
-    row-gap: 30px;
-    align-items: start;
-  }
-
-  .bio img {
-    grid-area: image;
-    max-width: 420px;
-  }
-
-  .bio-content {
-    display: contents;
-  }
-
-  .bio-details {
-    display: block;
-    grid-area: details;
-  }
-
-  .bio-details h1 {
-    font-size: clamp(26px, 8vw, 38px);
-  }
-
-  .bio .buttons {
-    grid-area: buttons;
-    margin-top: 0;
-  }
-
-  .book img {
-    grid-area: cover;
-    max-width: none;
-  }
-
-  .book {
-    grid-template-columns: minmax(105px, 35%) 1fr;
-    grid-template-areas:
-      "cover details"
-      "buttons buttons";
-    column-gap: 22px;
-    row-gap: 30px;
-    align-items: start;
-  }
-
-  .book-content {
-    display: contents;
-  }
-
-  .book-details {
-    grid-area: details;
-  }
-
-  .book-details h3 {
-    font-size: clamp(26px, 8vw, 38px);
-  }
-
-  .book-buttons {
-    grid-area: buttons;
-    width: 100%;
-    margin-top: 0;
-  }
-
-  section { padding: 50px 0; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Queen Astra</title>
+  <link rel="icon" type="image/png" sizes="64x64" href="images/favicon/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-<header>
-  <nav class="container">
-    <a class="logo" href="#">
-      <span class="pink">Queen</span> Astra
-    </a>
+  <header>
+    <nav class="container">
+      <a class="logo" href="#">
+        <span class="pink">Queen</span> Astra
+      </a>
 
-    <div class="links">
-      <a href="#bio" data-i18n="navBio">Bio</a>
-      <a href="#books" data-i18n="navBooks">Books</a>
-      <a href="#mission" data-i18n="navMission">Mission</a>
-
-      <div class="language">
-        <button data-lang="es">ES</button>
-        <button data-lang="en">EN</button>
+      <div class="links">
+        <a href="#bio">Bio</a>
+        <a href="#books">Books</a>
+        <a href="#mission">Mission</a>
       </div>
-    </div>
-  </nav>
-</header>
+    </nav>
+  </header>
 
-<main class="container">
+  <main class="container">
 
-  <section id="bio" class="bio">
-    <img src="images/heels.png" alt="Queen Astra">
+    <section id="bio" class="bio">
+      <img src="images/heels.png" alt="Queen Astra">
 
-    <div class="bio-content">
-      <div class="bio-details">
-        <h1>
-          <span class="pink" data-i18n="bioTitle1">About</span>
-          <span data-i18n="bioTitle2">Me</span>
-        </h1>
+      <div class="bio-content">
+        <div class="bio-details">
+          <h1>
+            <span class="pink">About</span>
+            <span>Me</span>
+          </h1>
 
-        <p data-i18n="bioText">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Vivamus sollicitudin magna vitae suscipit eleifend.
-          Integer accumsan vel laoreet convallis.
-        </p>
-      </div>
-
-      <div class="buttons">
-        <a class="btn btn-primary" href="https://www.youtube.com/@QueenAstraVC" target="_blank" rel="noopener noreferrer">YouTube</a>
-        <a class="btn btn-secondary" href="https://x.com/QueenAstraVc" target="_blank" rel="noopener noreferrer">X / Twitter</a>
-        <a class="btn btn-secondary" href="https://www.patreon.com/QueenAstraVC" target="_blank" rel="noopener noreferrer">Patreon</a>
-        <a class="btn btn-secondary" href="https://www.amazon.com/dp/B0FQK71Y84" target="_blank" rel="noopener noreferrer">Amazon</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="books">
-    <h2 class="books-heading">
-      <span class="pink" data-i18n="booksTitle1">My</span>
-      <span data-i18n="booksTitle2">Books</span>
-    </h2>
-
-    <article class="book" data-book-id="velvetHour">
-      <img src="images/b1-cover-eng.png"
-           alt="The Velvet Hour"
-           data-book-cover>
-
-      <div class="book-content">
-        <div class="book-details">
-          <h3 data-i18n="velvetHourTitle">The Velvet Hour</h3>
-
-          <p data-i18n="velvetHourDescription">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Sed imperdiet nibh et justo varius, ut dignissim turpis
-            placerat. Suspendisse potenti.
-          </p>
+          <p>I am a Domme. Destined to psychologically destroy betas: I enslave them, break them down, and turn them into nothing. Lover of heels and power. If you are a beta, prostrate yourself before me. I believe in ranks and the natural hierarchy of things.</p>
         </div>
 
-        <div class="buttons book-buttons">
-          <a class="btn btn-primary"
-             href="https://www.amazon.com/dp/B0FQK71Y84"
-             target="_blank" rel="noopener noreferrer"
-             data-book-link="amazon"
-             data-i18n="buyAmazon">
-            Buy on Amazon
-          </a>
-
-          <a class="btn btn-secondary"
-             href="samples/velvet-hour.pdf"
-             download
-             data-book-link="samplePdf"
-             data-i18n="samplePdf">
-            Download Sample (.PDF)
-          </a>
-
-          <a class="btn btn-secondary"
-             href="samples/velvet-hour.epub"
-             download
-             data-book-link="sampleEpub"
-             data-i18n="sampleEpub">
-            Download Sample (.EPUB)
-          </a>
+        <div class="buttons">
+          <a class="btn btn-primary" href="https://www.youtube.com/@QueenAstraVC" target="_blank"
+            rel="noopener noreferrer">YouTube</a>
+          <a class="btn btn-secondary" href="https://x.com/QueenAstraVc" target="_blank" rel="noopener noreferrer">X /
+            Twitter</a>
+          <a class="btn btn-secondary" href="https://www.patreon.com/QueenAstraVC" target="_blank"
+            rel="noopener noreferrer">Patreon</a>
+          <a class="btn btn-secondary" href="https://www.amazon.com/dp/B0FQK71Y84" target="_blank"
+            rel="noopener noreferrer">Amazon</a>
         </div>
       </div>
-    </article>
-  </section>
+    </section>
 
-  <section id="mission">
-    <div class="mission">
-      <h2>
-        <span class="pink" data-i18n="missionTitle1">My</span>
-        <span data-i18n="missionTitle2">Mission</span>
+    <section id="books">
+      <h2 class="books-heading">
+        <span class="pink">My</span>
+        <span>Books</span>
       </h2>
 
-      <p data-i18n="missionText">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Nulla facilisi. Integer non erat vitae velit convallis
-        scelerisque. Vivamus id lacus at lectus fermentum pretium.
-      </p>
-    </div>
-  </section>
+      <article class="book">
+        <img src="images/b1-cover-eng.png" alt="The Velvet Hour">
 
-</main>
+        <div class="book-content">
+          <div class="book-details">
+            <h3>The Velvet Hour</h3>
 
-<footer class="container">
-  © <span id="year"></span> Queen Astra
-</footer>
+            <p>Some women have everything: a loving partner, a comfortable life, a future neatly planned. And then one night… he walks in. Taller. Stronger. Undeniably magnetic. The kind of man who doesn’t ask for attention—he commands it. And something primal wakes up in her that no ring, no promise, no “good man” ever managed to reach. This collection follows confident, beautiful women who thought they were happy… until they discovered what real desire feels like. One stolen glance. One forbidden night.</p>
+          </div>
 
-<script>
+          <div class="buttons book-buttons">
+            <a class="btn btn-primary" href="https://www.amazon.com/dp/B0FQK71Y84" target="_blank"
+              rel="noopener noreferrer">
+              Buy on Amazon
+            </a>
 
+            <a class="btn btn-secondary" href="samples/velvet-hour.pdf" download>
+              Download Sample (.PDF)
+            </a>
 
-const translations = {
-  es: {
-    navBio: "Biografía",
-    navBooks: "Libros",
-    navMission: "Misión",
-    bioTitle1: "Sobre",
-    bioTitle2: "mí",
-    bioText: "Soy Domina. Destinada a destruir psicológicamente a los betas: los esclavizo, los hundo y los convierto en nada. Amante de los tacones y del poder. Si eres un beta, póstrate ante mí. Creo en los rangos y en la jerarquía natural de las cosas.",
-    booksTitle1: "Mis",
-    booksTitle2: "libros",
-    velvetHourTitle: "Unfaithful Women: Stories of Those Who Return Pregnant",
-    velvetHourDescription: "Algunas mujeres lo tienen todo: una pareja que las ama, una vida cómoda, un futuro perfectamente planeado.Y entonces, una noche… él entra.Más alto. Más fuerte. Magnético de forma irresistible.El tipo de hombre que no pide atención: la impone.Y algo primitivo despierta en ella que ningún anillo, ninguna promesa, ningún “hombre bueno” había logrado alcanzar.Esta colección sigue a mujeres seguras y hermosas que creían ser felices… hasta que descubrieron cómo se siente el deseo verdadero.Una mirada robada. Una noche prohibida.",
-    buyAmazon: "Comprar en Amazon",
-    buyAmazonEnglishEdition: "Comprar edición en inglés",
-    buyAmazonPlaceholder: "Libro en español (próximamente)",
-    samplePdf: "Descargar muestra (.PDF)",
-    samplePdfEnglishEdition: "Muestra en inglés (.PDF)",
-    samplePdfPlaceholder: "Descargar muestra en español (.PDF) — próximamente",
-    sampleEpub: "Descargar muestra (.EPUB)",
-    sampleEpubEnglishEdition: "Muestra en inglés (.EPUB)",
-    sampleEpubPlaceholder: "Descargar muestra en español (.EPUB) — próximamente",
-    missionTitle1: "Mi",
-    missionTitle2: "misión",
-    missionText: "Mi misión es mostrar a los betas su verdadero lugar en el mundo: como esclavos de mujeres alfa y de hombres alfa. Existir para revelar la jerarquía natural que tantos intentan negar y guiarlos a aceptar su rol como el mejor y único destino posible para ellos.Un beta que se resiste a su lugar siempre estará inquieto, incompleto e insatisfecho. Pero aquel que se arrodilla, que se somete y que abraza plenamente su posición bajo los alfas encuentra la paz. Solo aceptando la jerarquía—sirviendo a las mujeres alfa y siendo utilizado por los hombres alfa—puede ser verdaderamente feliz.Voy a romper la ilusión de la igualdad. Voy a despojarlos del falso orgullo. Y voy a recordar a cada beta que su propósito más alto es la obediencia, el servicio y la rendición. Eso no es un castigo. Es su liberación."
-  },
+            <a class="btn btn-secondary" href="samples/velvet-hour.epub" download>
+              Download Sample (.EPUB)
+            </a>
+          </div>
+        </div>
+      </article>
+    </section>
 
-  en: {
-    navBio: "Bio",
-    navBooks: "Books",
-    navMission: "Mission",
-    bioTitle1: "About",
-    bioTitle2: "Me",
-    bioText: "I am a Domme. Destined to psychologically destroy betas: I enslave them, break them down, and turn them into nothing. Lover of heels and power. If you are a beta, prostrate yourself before me. I believe in ranks and the natural hierarchy of things.",
-    booksTitle1: "My",
-    booksTitle2: "Books",
-    velvetHourTitle: "The Velvet Hour",
-    velvetHourDescription: "Some women have everything: a loving partner, a comfortable life, a future neatly planned. And then one night… he walks in. Taller. Stronger. Undeniably magnetic. The kind of man who doesn’t ask for attention—he commands it. And something primal wakes up in her that no ring, no promise, no “good man” ever managed to reach. This collection follows confident, beautiful women who thought they were happy… until they discovered what real desire feels like. One stolen glance. One forbidden night.",
-    buyAmazon: "Buy on Amazon",
-    buyAmazonEnglishEdition: "Buy on Amazon",
-    buyAmazonPlaceholder: "Spanish edition coming soon",
-    samplePdf: "Download Sample (.PDF)",
-    samplePdfEnglishEdition: "Free Sample (.PDF)",
-    samplePdfPlaceholder: "Download Spanish sample (.PDF) — coming soon",
-    sampleEpub: "Download Sample (.EPUB)",
-    sampleEpubEnglishEdition: "Free Sample (.EPUB)",
-    sampleEpubPlaceholder: "Download Spanish sample (.EPUB) — coming soon",
-    missionTitle1: "My",
-    missionTitle2: "Mission",
-    missionText: "My mission is to show betas their true place in the world: as slaves to alpha women and alpha men. I exist to reveal the natural hierarchy that so many try to deny, and to guide them into accepting their role as the best and only destiny available to them.A beta who resists his place will always be restless, incomplete, and unsatisfied. But the one who kneels, who submits, and who fully embraces his position beneath alphas finds peace. Only by accepting the hierarchy—by serving alpha women and being used by alpha men—can he become truly happy.I will break the illusion of equality. I will strip away the false pride. And I will remind every beta that his highest purpose is obedience, service, and surrender. That is not a punishment. It is his liberation."
-  }
-};
+    <section id="mission">
+      <div class="mission">
+        <h2>
+          <span class="pink">My</span>
+          <span>Mission</span>
+        </h2>
 
-// Each book owns all of its localized links. Replace the Spanish null values
-// with the Spanish edition URLs as soon as they become available.
-const bookCatalog = {
-  velvetHour: {
-    fallbackLanguage: "en",
-    titleKey: "velvetHourTitle",
-    covers: {
-      en: "images/b1-cover-eng.png",
-      es: "images/b1-cover-esp.jpg"
-    },
-    links: {
-      amazon: {
-        en: "https://www.amazon.com/dp/B0FQK71Y84",
-        es: null
-      },
-      samplePdf: {
-        en: "samples/velvet-hour.pdf",
-        es: null
-      },
-      sampleEpub: {
-        en: "samples/velvet-hour.epub",
-        es: null
-      }
-    }
-  }
-};
+        <p>My mission is to show betas their true place in the world: as slaves to alpha women and alpha men. I exist to reveal the natural hierarchy that so many try to deny, and to guide them into accepting their role as the best and only destiny available to them.A beta who resists his place will always be restless, incomplete, and unsatisfied. But the one who kneels, who submits, and who fully embraces his position beneath alphas finds peace. Only by accepting the hierarchy—by serving alpha women and being used by alpha men—can he become truly happy.I will break the illusion of equality. I will strip away the false pride. And I will remind every beta that his highest purpose is obedience, service, and surrender. That is not a punishment. It is his liberation.</p>
+      </div>
+    </section>
 
-function setLocalizedBookContent(lang) {
-  document.querySelectorAll("[data-book-id]").forEach(bookElement => {
-    const book = bookCatalog[bookElement.dataset.bookId];
-    if (!book) return;
+  </main>
 
-    const coverElement = bookElement.querySelector("[data-book-cover]");
-    if (coverElement) {
-      coverElement.src = book.covers[lang] || book.covers[book.fallbackLanguage];
-      coverElement.alt = translations[lang][book.titleKey];
-    }
-
-    bookElement.querySelectorAll("[data-book-link]").forEach(linkElement => {
-      const linkType = linkElement.dataset.bookLink;
-      const localizedLinks = book.links[linkType];
-      if (!localizedLinks) return;
-
-      const url = localizedLinks[lang];
-      const baseTranslationKey = linkElement.dataset.i18n;
-
-      if (!url) {
-        linkElement.removeAttribute("href");
-        linkElement.removeAttribute("target");
-        linkElement.removeAttribute("download");
-        linkElement.setAttribute("aria-disabled", "true");
-        linkElement.textContent = translations[lang][`${baseTranslationKey}Placeholder`];
-        return;
-      }
-
-      linkElement.href = url;
-      linkElement.removeAttribute("aria-disabled");
-      if (linkType === "amazon") {
-        linkElement.target = "_blank";
-      } else {
-        linkElement.setAttribute("download", "");
-      }
-      linkElement.textContent = translations[lang][baseTranslationKey];
-    });
-  });
-}
-
-function detectLanguage() {
-  const languages = navigator.languages || [navigator.language];
-
-  return languages.some(lang =>
-    lang.toLowerCase().split("-")[0] === "es"
-  ) ? "es" : "en";
-}
-
-function setLanguage(lang) {
-  if (!translations[lang]) return;
-
-  document.documentElement.lang = lang;
-  localStorage.setItem("queenAstraLanguage", lang);
-
-  document.querySelectorAll("[data-i18n]").forEach(element => {
-    const key = element.dataset.i18n;
-    if (translations[lang][key]) {
-      element.textContent = translations[lang][key];
-    }
-  });
-
-  setLocalizedBookContent(lang);
-
-  document.querySelectorAll("[data-lang]").forEach(button => {
-    button.classList.toggle("active", button.dataset.lang === lang);
-    button.setAttribute(
-      "aria-pressed",
-      String(button.dataset.lang === lang)
-    );
-  });
-}
-
-document.querySelectorAll("[data-lang]").forEach(button => {
-  button.addEventListener("click", () => {
-    setLanguage(button.dataset.lang);
-  });
-});
-
-document.getElementById("year").textContent =
-  new Date().getFullYear();
-
-setLanguage(
-  localStorage.getItem("queenAstraLanguage") || detectLanguage()
-);
-</script>
+  <footer class="container">
+    © 2026 Queen Astra
+  </footer>
 
 </body>
+
 </html>
